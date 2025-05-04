@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 body{
-  background-color:#23252b;
+  background-color: black;
 }
 
 

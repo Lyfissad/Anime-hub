@@ -8,7 +8,7 @@ export default {
       extend: {
         colors:{
             black: "#23252b",
-            yellow: "#008000"
+            myYellow: "#008000"
         }
       },
     },

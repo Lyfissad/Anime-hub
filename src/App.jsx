@@ -15,15 +15,7 @@ const options = {
 	}
 };
 
-// useEffect(() => {
-//   fetch(url, options)
-//   .then(response => response.json())
-//   .then(response => {
-//     console.log(response);
-//     setData(response);
-//   })
-//   .catch(err => console.error(err));  
-// },[])
+
 
 console.log(data)
 return (
@@ -35,7 +27,20 @@ return (
 export default App
 
 
+
 //Fetching and mapping logic
+
+// useEffect(() => {
+//   fetch(url, options)
+//   .then(response => response.json())
+//   .then(response => {
+//     console.log(response);
+//     setData(response);
+//   })
+//   .catch(err => console.error(err));  
+// },[])
+
+
 // <>
 //     <h1>Anime List Bitch</h1>
 //     {data? data.data.map((item) => ( 
