@@ -1,25 +1,45 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import Header from './components/header';
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+  } from "@/components/ui/carousel"
+  
 
 function App() {
-const [data, setData] = useState({});
-const viteApiKey = import.meta.env.VITE_API_KEY
-const viteApiUrl = import.meta.env.VITE_API_URL 
-const url = `${viteApiUrl}/anime?page=1&size=10&sortBy=ranking&sortOrder=asc`;
-const options = {
-	method: 'GET',
-	headers: {
-		'x-rapidapi-key': viteApiKey,
-		'x-rapidapi-host': 'anime-db.p.rapidapi.com'
+const [data, setData] = useState(null);
+const url = "https://api.jikan.moe/v4/anime/20";
+
+useEffect(() => {
+	fetch(url)
+	.then(response => response.json())
+	.then(response => {
+	  console.log(response);
+	  setData(response.data);
+	})
+	.catch(err => console.error(err));  
+  
+
+},[])
+  
+
+useEffect(()=>{
+	if(data){
+		console.log(data.title)
 	}
-};
+},[data])
+  
 
-
-
-console.log(data)
 return (
-  <Header />
+	<div className="home">
+		<Header />
+	</div>
+
+
 );
 
 }
@@ -30,15 +50,19 @@ export default App
 
 //Fetching and mapping logic
 
-// useEffect(() => {
-//   fetch(url, options)
-//   .then(response => response.json())
-//   .then(response => {
-//     console.log(response);
-//     setData(response);
-//   })
-//   .catch(err => console.error(err));  
-// },[])
+// {data?.data?.length?(
+// 	<Carousel>
+// 	<CarouselContent>
+// 		<CarouselItem><img className='w-full h-5/6' src={data.data[0].image} alt="image 1" /></CarouselItem>
+// 		<CarouselItem><img className='w-full h-5/6' src={data.data[1].image} alt="image 2" /></CarouselItem>
+// 		<CarouselItem><img className='w-full h-5/6' src={data.data[2].image} alt="image 3" /></CarouselItem>
+// 	</CarouselContent>
+// 	<div className="flex justify-between items-center w-full">
+// 	<CarouselPrevious className="bg-white text-black hover:bg-gray-200 rounded-full shadow-md ml-20 mr-auto" />
+// 	<CarouselNext className="bg-white text-black hover:bg-gray-200 rounded-full shadow-md ml-auto mr-20" />
+// 	</div>
+// 	</Carousel>
+// ): (<p className='text-white'>Loading...</p>)}	
 
 
 // <>

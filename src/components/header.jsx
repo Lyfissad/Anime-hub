@@ -22,7 +22,7 @@ import logo from '../assets/icon-anime.svg';
 export default function Header(){
     const [searchActive,setSearchActive] = useState(false)
     return(
-        <div className="flex bg-[#23252b] h-16 p-4">
+        <div className="flex bg-[#23252b] h-16 p-4 w-full">
             <Drawer className = "xs:visible md:invisible">
             <DrawerTrigger><SlMenu className = "fill-amber-50 size-8"/></DrawerTrigger>
             <DrawerContent className="h-[100%] bg-black">
