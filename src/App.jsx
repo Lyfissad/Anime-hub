@@ -12,7 +12,7 @@ import {
 
 function App() {
 const [data, setData] = useState(null);
-const url = "https://api.jikan.moe/v4/anime/20";
+const url = "https://api.jikan.moe/v4/top/anime";
 
 useEffect(() => {
 	fetch(url)
@@ -29,7 +29,7 @@ useEffect(() => {
 
 useEffect(()=>{
 	if(data){
-		console.log(data.title)
+		console.log(data[1].images.jpg.large_image_url)
 	}
 },[data])
   
@@ -37,6 +37,26 @@ useEffect(()=>{
 return (
 	<div className="home">
 		<Header />
+		{data?.length?(
+		<Carousel>
+		<CarouselContent>
+			<CarouselItem><img className='w-full h-5/6' src={data[0].images.jpg.large_image_url} alt="image 1" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[1].images.jpg.large_image_url} alt="image 2" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[2].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[3].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[4].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[5].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[6].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[7].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[8].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+			<CarouselItem><img className='w-full h-5/6' src={data[9].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+		</CarouselContent>
+		<div className="flex justify-between items-center w-full">
+		<CarouselPrevious className="bg-white text-black hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-20 mr-auto" />
+		<CarouselNext className="bg-white text-black hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-auto mr-20" />
+		</div>
+		</Carousel>
+	): (<p className='text-white'>Loading...</p>)}
 	</div>
 
 
@@ -50,19 +70,7 @@ export default App
 
 //Fetching and mapping logic
 
-// {data?.data?.length?(
-// 	<Carousel>
-// 	<CarouselContent>
-// 		<CarouselItem><img className='w-full h-5/6' src={data.data[0].image} alt="image 1" /></CarouselItem>
-// 		<CarouselItem><img className='w-full h-5/6' src={data.data[1].image} alt="image 2" /></CarouselItem>
-// 		<CarouselItem><img className='w-full h-5/6' src={data.data[2].image} alt="image 3" /></CarouselItem>
-// 	</CarouselContent>
-// 	<div className="flex justify-between items-center w-full">
-// 	<CarouselPrevious className="bg-white text-black hover:bg-gray-200 rounded-full shadow-md ml-20 mr-auto" />
-// 	<CarouselNext className="bg-white text-black hover:bg-gray-200 rounded-full shadow-md ml-auto mr-20" />
-// 	</div>
-// 	</Carousel>
-// ): (<p className='text-white'>Loading...</p>)}	
+	
 
 
 // <>
