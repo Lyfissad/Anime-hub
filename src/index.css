@@ -2,6 +2,24 @@
 @import "tw-animate-css";
 
 
+@theme {
+  --color-darkSlate : #23252b;
+  --color-lightSlate : #30333b;
+  --color-lightGray : #D1D5DB;
+}
+
+@keyframes fade-in{
+  from {opacity : 0}
+  to {opacity: 1;}
+}
+
+
+
+.fade-in{
+  animation: fade-in 0.5s ease-in-out;
+}
+
+
 body{
   background-color: black;
 }

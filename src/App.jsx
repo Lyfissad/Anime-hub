@@ -8,11 +8,11 @@ import {
 	CarouselNext,
 	CarouselPrevious,
   } from "@/components/ui/carousel"
-  
+  import { AiOutlineLoading } from "react-icons/ai";
 
 function App() {
 const [data, setData] = useState(null);
-const url = "https://api.jikan.moe/v4/top/anime";
+const url = "https://api.jikan.moe/v4/seasons/now";
 
 useEffect(() => {
 	fetch(url)
@@ -29,34 +29,48 @@ useEffect(() => {
 
 useEffect(()=>{
 	if(data){
-		console.log(data[1].images.jpg.large_image_url)
+		console.log(data)
 	}
 },[data])
-  
+
+
+	const tiles = Array.isArray(data)
+	? data.map((item, index) => (
+		<CarouselItem key={index}>
+			<div className="relative">
+				<img
+				className="w-full h-5/6 object-cover"
+				src={item.images.jpg.large_image_url}
+				alt={item.title}
+				/>
+				<div className="bg-lightSlate w-48 absolute h-8 rounded-md">
+					<p className='text-lightGray italic p-auto'>{item.rating}</p>
+				</div>
+			</div>
+		</CarouselItem>
+		))
+	: null;
+
+
 
 return (
 	<div className="home">
 		<Header />
 		{data?.length?(
 		<Carousel>
-		<CarouselContent>
-			<CarouselItem><img className='w-full h-5/6' src={data[0].images.jpg.large_image_url} alt="image 1" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[1].images.jpg.large_image_url} alt="image 2" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[2].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[3].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[4].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[5].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[6].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[7].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[8].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
-			<CarouselItem><img className='w-full h-5/6' src={data[9].images.jpg.large_image_url} alt="image 3" /></CarouselItem>
+		<CarouselContent className="fade-in relative">
+		{tiles}
 		</CarouselContent>
 		<div className="flex justify-between items-center w-full">
-		<CarouselPrevious className="bg-white text-black hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-20 mr-auto" />
-		<CarouselNext className="bg-white text-black hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-auto mr-20" />
+		<CarouselPrevious className="bg-white text-black fade-in hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-20 mr-auto" />
+		<CarouselNext className="bg-white text-black fade-in hover:bg-gray-200 rounded-full xs:hidden md:visible shadow-md ml-auto mr-20" />
 		</div>
 		</Carousel>
-	): (<p className='text-white'>Loading...</p>)}
+	): (
+	<div className="flex justify-center items-center min-h-screen w-full h-full">
+	<AiOutlineLoading className='fill-lightSlate size-18 animate-spin m-auto'/>
+	</div>
+	)}
 	</div>
 
 
@@ -65,6 +79,13 @@ return (
 }
 
 export default App
+
+
+
+
+
+
+
 
 
 
