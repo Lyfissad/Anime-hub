@@ -3,9 +3,19 @@
 
 
 @theme {
-  --color-darkSlate : #23252b;
+  --color-vibeBlack : #0B0C10;
+  --color-oxBlood : #581C1C;
+  --color-grayish : #2C2F33;
+  --color-amberAccent: #C99E6A;
   --color-lightSlate : #30333b;
   --color-lightGray : #D1D5DB;
+  --font-playful : "Delius", cursive;
+  --breakpoint-*: initial;
+  --breakpoint-phone: 20rem;
+  --breakpoint-miniTab: 40rem;
+  --breakpoint-tab: 60rem;
+  --breakpoint-laptop: 110rem;
+
 }
 
 @keyframes fade-in{
@@ -19,9 +29,8 @@
   animation: fade-in 0.5s ease-in-out;
 }
 
-
 body{
-  background-color: black;
+  background-color: #0B0C10;
 }
 
 
