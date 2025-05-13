@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css'
-import Header from './components/header';
+import Header from './components/ui/header';
 import {
 	Carousel
   } from "@/components/ui/carousel"
   import { AiOutlineLoading } from "react-icons/ai";
   import Content from "./components/ui/carouselcontent.jsx"
+  import TopAnime from './components/ui/topAnime';
 
 
 
@@ -47,10 +48,10 @@ return (
 		</Carousel>
 	): (
 	<div className="flex justify-center items-center min-h-screen w-full h-full">
-	<AiOutlineLoading className='fill-amberAccent size-18 animate-spin m-auto'/>
+	<AiOutlineLoading className='fill-crimAccent size-18 animate-spin m-auto'/>
 	</div>
 	)}
-
+	<TopAnime />
 	</div>
 
 

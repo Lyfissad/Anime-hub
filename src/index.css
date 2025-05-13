@@ -3,13 +3,16 @@
 
 
 @theme {
-  --color-vibeBlack : #0B0C10;
+  --color-vibeBlack : #0E0E11;
   --color-oxBlood : #581C1C;
-  --color-grayish : #2C2F33;
-  --color-amberAccent: #C99E6A;
+  --color-grayish : #2B2B30;
+  --color-crimAccent: #DC143C;
+  --color-text-pri: #F1F1F1;
+  --color-text-mute:#AAAAAA;
   --color-lightSlate : #30333b;
   --color-lightGray : #D1D5DB;
-  --font-playful : "Delius", cursive;
+  --font-headings: 'Poppins', 'sans-serif';
+  --font-playful : 'Inter', 'sans-serif';
   --breakpoint-*: initial;
   --breakpoint-phone: 20rem;
   --breakpoint-miniTab: 40rem;

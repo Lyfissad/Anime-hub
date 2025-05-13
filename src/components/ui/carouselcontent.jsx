@@ -5,6 +5,7 @@ import {
 	CarouselPrevious,
   } from "@/components/ui/carousel"
   import { FaCirclePlay } from "react-icons/fa6";
+  import { IoPlayOutline } from "react-icons/io5";
 
 
 
@@ -15,7 +16,7 @@ const Content = (props) => {
 const tiles = Array.isArray(props.data)
     ? props.data.map((item, index) => (
         <CarouselItem key={index} className="w-full">
-            <div className="relative min-h-[45rem] object-cover w-full overflow-hidden">
+            <div className="relative min-h-[45rem] object-cover items-center justify-center w-full overflow-hidden">
                 <img
                 className="w-full h-[35rem] object-cover filter contrast-110 saturate-150"
                 src={item.images.jpg.large_image_url}
@@ -28,13 +29,15 @@ const tiles = Array.isArray(props.data)
                     opacity: 1
                     }}
                 ></div>
-                <div className="phone:bg-grayish w-full h-8 absolute flex items-center space-x-20 justify-center px-4">
-                    <p className='text-amberAccent font-playful italic'>{item.rating.split(" ")[0]}</p>
-                    <p className='text-amberAccent font-playful ml-5'>Score: {item.score}</p>
+                <div className="phone:bg-crimAccent w-full h-8 absolute flex items-center space-x-20 justify-center px-4">
+                    <p className='text-crimAccent font-playful text-vibeBlack italic'>{item.rating.split(" ")[0]}</p>
+                    <p className='text-crimAccent font-playful text-vibeBlack ml-5'>Rating: {item.score}</p>
                 </div>
-                <button className="w-full h-10 flex items-center justify-center relative top-9 bg-grayish border-4 border-vibeBlack font-playful rounded-md text-[#C99E6A]">
-                    <FaCirclePlay className="size-7 fill-amberAccent"/>START WATCHING
-                    </button>
+                <button className="w-80 h-10 flex items-center justify-center
+                 relative top-12 text-md bg-crimAccent border-4 border-vibeBlack
+                  font-headings rounded-md text-vibeBlack mx-auto gap-2">
+                    <IoPlayOutline className="size-7 fill-vibeBlack"/>START WATCHING
+                </button>
             </div>
         </CarouselItem>
         ))
