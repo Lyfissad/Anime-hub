@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 
 
 
 export default function TopAnime(){
     const [topData,setTopdata] = useState(null)
-
     const topUrl = "https://api.jikan.moe/v4/top/anime?limit=10"
 
 
@@ -25,17 +24,40 @@ export default function TopAnime(){
 	}
 },[topData])
 
-    const topContent = Array.isArray(topData)? topData.map((item, id) => (
-    <div className="mt-8 min-w-[10rem]" key={id}>
-            <img className="h-60 w-full overflow-y-scroll object-cover" src={item.images.jpg.image_url} alt="" />
-            <h3 className="text-text-pri mt-3 font-headings text-sm whitespace-pre-wrap">{item.title}</h3>
-            <h4 className="text-text-mute pt-3 font-playful text-xs">{item.year}</h4>
+
+    function Tiles ({item}){
+        const [visible,setVisible] = useState(false)
+        const ref = useRef()
+
+        useEffect(()=>{
+        const observer = new IntersectionObserver(
+            ([entry]) => setVisible(entry.isIntersecting),
+            {threshold : 0.6}
+        )
+        if(ref.current)observer.observe(ref.current)
+            return  () => observer.disconnect() 
+
+    }, [])
+
+
+    return(
+        <div  ref={ref} className={`mt-8 min-w-[10rem] transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
+            <img className="h-60 w-full rounded-xl object-cover" src={item.images.jpg.image_url} alt="" />
+            <div className="flex flex-col h-[5rem] justify-between">
+            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 text-sm whitespace-pre-wrap">{item.title}</h3>
+            <h4 className="text-text-mute pt-3 font-playful text-xs whitespace-pre-line">{item.genres[0].name}, {item.genres[1].name}, {item.genres[2].name}</h4>
+            </div>
         </div>
+    )
+    }
+
+    const topContent = Array.isArray(topData)? topData.map((item, id) => (
+        <Tiles item = {item} key={id}/>
     )) : null;
 
 
     return(
-        <div className="mx-7 mb-5">
+        <div className={`mx-7 my-10`}>
             <h1 
             className="font-headings text-text-pri text-2xl mb-5">
                 Check out our highest rated shows!
@@ -44,7 +66,7 @@ export default function TopAnime(){
             className="font-playful text-text-mute">
                 Enjoy the best anime experience with the highest rated shows voted by you.
             </h4>
-            <div className="flex gap-5 overflow-x-auto whitespace-nowrap scrollbar-hidden">{topContent}</div>
+            <div className="flex gap-8 overflow-x-auto whitespace-nowrap overflow-y-hidden scrollbar-hidden">{topContent}</div>
         </div>
     )
 }
