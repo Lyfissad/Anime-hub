@@ -11,7 +11,6 @@ import {
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { useState } from "react";
-import { ImTv } from "react-icons/im";
 import logo from "@/assets/icon-anime.svg"; 
 
 

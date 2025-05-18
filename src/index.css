@@ -33,6 +33,15 @@
   animation: fade-in 0.5s ease-in-out;
 }
 
+@keyframes fade-out{
+  from {opacity : 1}
+  to {opacity: 0;}
+}
+
+.fade-out{
+  animation: fade-out 0.5s ease-in-out;
+}
+
 body{
   background-color: #0B0C10;
 }

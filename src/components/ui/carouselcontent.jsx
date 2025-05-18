@@ -19,7 +19,7 @@ const tiles = Array.isArray(props.data)
             <div className="relative min-h-[45rem] object-cover items-center justify-center w-full overflow-hidden">
                 <img
                 className="w-full h-[35rem] object-cover filter contrast-110 saturate-150"
-                src={item.images.jpg.large_image_url}
+                src={item.images.webp.large_image_url}
                 alt={item.title}
                 />
                 <div

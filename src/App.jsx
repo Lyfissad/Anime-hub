@@ -7,7 +7,8 @@ import {
   import { AiOutlineLoading } from "react-icons/ai";
   import Content from "./components/ui/carouselcontent.jsx"
   import TopAnime from './components/ui/topAnime';
-import TrialBox from './components/trailBox';
+import TrialBox from './components/ui/trialBox';
+import NewEpisodes from './components/ui/NewEpisodes';
 
 
 
@@ -54,6 +55,7 @@ return (
 	)}
 	<TopAnime />
 	<TrialBox />
+	<NewEpisodes />
 	</div>
 
 
