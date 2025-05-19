@@ -55,7 +55,7 @@ return (
 	)}
 	<TopAnime />
 	<TrialBox />
-	<NewEpisodes />
+	<NewEpisodes data = {data}/>
 	</div>
 
 
