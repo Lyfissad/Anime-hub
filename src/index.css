@@ -22,6 +22,56 @@
 
 }
 
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #1a1a1a; 
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #e11d48; 
+  border-radius: 10px;
+  border: 2px solid #1a1a1a;
+}
+
+
+@layer base {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #e11d48 #1a1a1a;
+  }
+
+  html::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: #e11d48;
+    border-radius: 20px;
+    border: 2px solid #1a1a1a;
+  }
+}
+
+@keyframes spinFast{
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+.spinFast{
+  animation: spinFast 0.5s ease-in-out;
+}
+
 @keyframes fade-in{
   from {opacity : 0}
   to {opacity: 1;}
@@ -43,7 +93,7 @@
 }
 
 body{
-  background-color: #0B0C10;
+  background-color: #0E0E11;
 }
 
 

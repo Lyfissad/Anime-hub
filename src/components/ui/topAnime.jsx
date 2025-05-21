@@ -51,7 +51,7 @@ export default function TopAnime(){
 
 
     return(
-        <div  ref={ref} className={`mt-8 min-w-[10rem] transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
+        <div  ref={ref} className={`mt-8 min-w-[10rem] p-2 transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
             <img className="h-60 w-full rounded-xl object-cover" src={item.images.webp.image_url} alt="" />
             <div className="flex flex-col h-[5rem] justify-between">
             <h3 className="text-text-pri mt-3 font-headings line-clamp-2 text-sm whitespace-pre-wrap">{item.title}</h3>

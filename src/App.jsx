@@ -9,6 +9,7 @@ import {
   import TopAnime from './components/ui/topAnime';
 import TrialBox from './components/ui/trialBox';
 import NewEpisodes from './components/ui/NewEpisodes';
+import Footer from './components/ui/Footer';
 
 
 
@@ -50,12 +51,13 @@ return (
 		</Carousel>
 	): (
 	<div className="flex justify-center items-center min-h-screen w-full h-full">
-	<AiOutlineLoading className='fill-crimAccent size-18 animate-spin m-auto'/>
+	<AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
 	</div>
 	)}
 	<TopAnime />
 	<TrialBox />
 	<NewEpisodes data = {data}/>
+	<Footer />
 	</div>
 
 
