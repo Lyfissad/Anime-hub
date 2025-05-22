@@ -7,6 +7,7 @@
   --color-oxBlood : #581C1C;
   --color-grayish : #2B2B30;
   --color-crimAccent: #DC143C;
+  --color-darkCrim : #6E0B1F;
   --color-text-pri: #F1F1F1;
   --color-text-mute:#AAAAAA;
   --color-lightSlate : #30333b;
@@ -14,11 +15,13 @@
   --font-headings: 'Poppins', 'sans-serif';
   --font-playful : 'Inter', 'sans-serif';
   --font-logo : "Chewy", 'sans-serif';
+  --font-stretched : "Staatliches", 'sans-serif';
   --breakpoint-*: initial;
   --breakpoint-phone: 20rem;
   --breakpoint-miniTab: 40rem;
   --breakpoint-tab: 60rem;
   --breakpoint-laptop: 110rem;
+  --backgound-customFooter: linearGradient(to bottom,  #0E0E11 70%, #6E0B1F 30%)
 
 }
 

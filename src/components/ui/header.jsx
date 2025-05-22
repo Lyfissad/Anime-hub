@@ -27,10 +27,10 @@ export default function Header(){
             <Drawer className = "xs:visible md:invisible">
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8"/></DrawerTrigger>
             <DrawerContent className="h-[70%] bg-black">
-                <ul className="space-y-4 text-xl ml-12 mt-4">
-                    <li className="text-white">New</li>
-                    <li className="text-white">Popular</li>
-                    <li className="text-white">browse all</li>
+                <ul className="space-y-4 text-xl ml-12 mt-4 text-text-pri font-playful">
+                    <li className="">New</li>
+                    <li className="">Popular</li>
+                    <li className="">browse all</li>
                 </ul>
             </DrawerContent>
             </Drawer>
