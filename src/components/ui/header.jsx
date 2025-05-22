@@ -53,7 +53,7 @@ export default function Header(){
 
             <input type="text" placeholder="Search" className={`ml-auto h-8 border-2 border-text-mute outline-none
                  active:border-crimAccent transition-all duration-300 ease-in-out focus:border-crimAccent
-                  rounded-sm p-3 ${searchActive? 'text-white opacity-100 w-1/2': 'w-0 overflow-hidden opacity-0'}`}/>
+                  rounded-sm p-3 ${searchActive? 'text-white opacity-100 phone:w-1/2 tab:w-1/4': 'w-0 overflow-hidden opacity-0'}`}/>
 
             <IoMdSearch className="size-9 fill-crimAccent ml-2 justify-center cursor-pointer" onClick={()=>setSearchActive(!searchActive)}/>
         </div>

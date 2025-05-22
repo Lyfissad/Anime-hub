@@ -17,10 +17,13 @@
   --font-logo : "Chewy", 'sans-serif';
   --font-stretched : "Staatliches", 'sans-serif';
   --breakpoint-*: initial;
+  --breakpoint-miniphone:10rem;
   --breakpoint-phone: 20rem;
-  --breakpoint-miniTab: 40rem;
+  --breakpoint-minitab: 40rem;
   --breakpoint-tab: 60rem;
-  --breakpoint-laptop: 110rem;
+  --breakpoint-laptop:80rem;
+  --breakpoint-pc: 110rem;
+  
   --backgound-customFooter: linearGradient(to bottom,  #0E0E11 70%, #6E0B1F 30%)
 
 }

@@ -12,9 +12,9 @@ function PlaceTiles(){
 function EpisodesTiles({ item }){
     return(
         <div className="flex mb-6 h-[8rem] w-[21rem] fade-in">
-            <img className="h-[8rem] min-w-[45%] object-cover rounded-md"  src={item.images.webp.image_url} alt="Episode Image" />
+            <img className="phone:h-[8rem] phone:min-w-[45%] object-cover rounded-md"  src={item.images.webp.image_url} alt="Episode Image" />
             <div className="max-w-[55%] text-text-pri font-playful m-2 ml-4">
-                <h1 className=" line-clamp-2">{item.title_english? item.title_english : item.title}</h1>
+                <h1 className=" line-clamp-2 laptop:text-xl">{item.title_english? item.title_english : item.title}</h1>
                 <div className="text-text-mute text-sm mt-2">
                     <h4>Episode: {item.episodes}</h4>
                     <h4>Airing on: {item.broadcast.day}</h4>
@@ -30,7 +30,6 @@ const placeTilesSection = Array.from({length : 5}, (_, i) => <PlaceTiles key = {
 
 export default function NewEpisodes(props){
     const [place, setPlace] = useState(false)
-    const NewEpiURL = "https://api.jikan.moe/v4/seasons/now?limit=5"
 
 
     setTimeout(() => {
@@ -46,19 +45,20 @@ export default function NewEpisodes(props){
     }) : null
     
     return(
-
-        <div className="ml-8 my-14">
+        <div>
+        <div className="ml-8 phone:my-14 minitab:my-28">
             <div className="flex space-x-3 my-5">
-                <ImTv  className="size-6 fill-text-pri"/>
-                <h1 className="text-text-pri text-xl font-headings justify-center items-center">New Episodes</h1>
+                <ImTv  className="phone:size-6 minitab:size-8 fill-text-pri"/>
+                <h1 className="text-text-pri phone:text-xl minitab:text-3xl font-headings justify-center items-center">New Episodes</h1>
             </div>
-            <h4 className="text-text-pri text-xl font-headings">Today</h4>
+            <h4 className="text-text-pri phone:text-xl font-headings">Today</h4>
             <hr className="w-7/8 my-3"/>
-            <div className="space-y-3"> 
+            <div className="phone:grid mt-10 mx-auto phone:mx-auto phone:grid-cols-1 minitab:grid-cols-2 laptop:grid-cols-3 pc:grid-cols-4"> 
                 {Array.isArray(props.data)?
                 (place? NewEpiContent : placeTilesSection) : null}
             </div>
-            <button className="bg-crimAccent text-vibeBlack font-headings w-[21rem] h-[3rem]">SHOW MORE</button>
+        </div>
+        <button className="bg-crimAccent flex items-center justify-center my-15 mx-auto text-vibeBlack font-headings phone:w-[20rem] minitab:w-[32rem] h-[3rem]">SHOW MORE</button>
         </div>
     )
 }

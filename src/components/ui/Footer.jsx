@@ -6,7 +6,7 @@ export default function Footer(){
     return(
         <div>
             <div className="mx-auto mt-12 font-playful gap-y-2 grid place-items-center">
-                    <img src="src/assets/Upset.png" alt="angry girl" className="size-65" />
+                    <img src="Upset.png" alt="angry girl" className="size-65" />
                 <h1 className="font-headings text-text-pri text-lg">
                     Still Looking for something to watch?
                 </h1>
