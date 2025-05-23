@@ -69,14 +69,14 @@ export default function TopAnime(){
     return(
         <div className={`mx-7 my-10 min-h-[32rem]`}>
 
-            {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[4rem] mb-3"></div> :
+            {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[4rem] minitab:w-[30rem] mb-3"></div> :
              <h1 
             className="font-headings text-text-pri text-2xl mb-5 fade-in ">
                 Check out our highest rated shows!
             </h1>}
 
 
-            {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[2rem]"></div> : 
+            {place? <div className="bg-neutral-800 animate-pulse rounded-xl h-[2rem] minitab:w-[35rem]"></div> : 
             <h4 
             className="font-playful text-sm text-text-mute fade-in">
                 Enjoy the best anime experience with the highest rated shows voted by you.

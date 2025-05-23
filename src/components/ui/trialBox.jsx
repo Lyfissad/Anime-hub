@@ -15,11 +15,11 @@ export default function TrialBox(){
 
     return(
         <div>
-            {place? <div className="bg-neutral-800 animate-pulse rounded-3xl phone:w-[21rem] h-[14rem] my-10 mx-auto"></div> : 
+            {place? <div className="bg-neutral-800 animate-pulse rounded-3xl phone:w-[21rem] minitab:w-[86%] h-[14rem] my-10 mx-auto"></div> : 
             
             <div className="max-w-[110rem] phone:w-[21rem] minitab:w-[86%] minitab:max-w-[120rem] minitab:flex minitab:justify-center minitab:item-center h-[14rem] 
             phone:grid phone:place-items-center mx-auto my-10 bg-vibeBlack
-            rounded-3xl font-playful text-text-mute text-sm
+            rounded-3xl font-playful text-text-mute text-sm fade-in
             bg-[#0b0c10] shadow-[0_0_40px_rgba(220,20,60,0.35)] fade-in">
                 <img src={logo} alt="logo" className="phone:hidden minitab:block minitab:size-18 minitab:ml-5 laptop:size-28 pc:size-36" />
                 <div className="minitab:block space-y-4 laptop:mr-35 pc:max-mr-50">
