@@ -21,8 +21,8 @@ export default function TopAnime(){
                     averageScore
                     status
                     coverImage{
-                        medium
                         large
+                        extraLarge
                     }
                     genres
                     }
@@ -60,21 +60,23 @@ export default function TopAnime(){
         useEffect(()=>{
         const observer = new IntersectionObserver(
             ([entry]) => setVisible(entry.isIntersecting),
-            {threshold : 0.6}
+            { threshold: [0.4, 0.6, 0.8] }
         )
         if(ref.current)observer.observe(ref.current)
-            return  () => observer.disconnect() 
+            return  () => {
+        if (ref.current) observer.unobserve(ref.current);
+    };
 
     }, [])
 
 
     return(
-        <div  ref={ref} className={`mt-8 min-w-[10rem] p-2 cursor-pointer
-         transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
-            <img className="h-60 w-full rounded-xl object-cover" src={item.coverImage.large} alt="" />
-            <div className="flex flex-col h-[5rem] justify-between">
-            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 text-sm whitespace-pre-wrap">{item.title.english || item.title.romanji || item.title.native}</h3>
-            <h4 className="text-text-mute pt-3 font-playful text-xs whitespace-pre-line">{item.genres[0]}, {item.genres[1]}</h4>
+        <div ref={ref} className={`mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
+            transition-all transition-filter ease-in-out duration-300 ${visible ? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
+            <img className="phone:h-60 minitab:h-80 w-full rounded-xl object-cover" src={item.coverImage.extraLarge} alt="Cover Picture" />
+            <div className="flex flex-col min-h-[5rem] justify-between">
+            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 phone:text-sm minitab:text-base whitespace-pre-wrap">{item.title.english || item.title.romanji || item.title.native}</h3>
+            <h4 className="text-text-mute pt-3 font-playful phone:text-xs minitab:text-sm whitespace-pre-line">{item.genres[0]}, {item.genres[1]}</h4>
             </div>
         </div>
     )
@@ -104,7 +106,7 @@ export default function TopAnime(){
             </h4>}
 
 
-            <div className="flex gap-8 overflow-x-auto whitespace-nowrap touch-pan-x overflow-y-hidden scrollbar-hide h-[24rem]">
+            <div className="flex gap-8 overflow-x-auto whitespace-nowrap touch-pan-x overflow-y-hidden scrollbar-hide min-h-[24rem]">
                 {topContent? topContent : "loading"}
             </div>
         </div>

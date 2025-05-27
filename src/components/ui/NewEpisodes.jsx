@@ -45,7 +45,7 @@ function EpisodesTiles({ item }){
 
     return(
         <div className="flex mb-6 h-[8rem] w-[21rem] fade-in">
-            <img className="phone:h-[8rem] phone:min-w-[45%] object-cover rounded-md"  src={item.coverImage.extraLarge} alt="Episode Image" />
+            <img className="phone:h-[8rem] phone:min-w-[45%] object-cover rounded-md"  src={item.coverImage.extraLarge} alt="Episode picture" />
             <div className="max-w-[55%] text-text-pri font-playful ml-4">
                 <h1 className=" line-clamp-2 laptop:text-xl">{item.title.english || item.title.romaji || item.title.native}</h1>
                 <div className="text-text-mute text-xs mt-2">

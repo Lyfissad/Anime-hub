@@ -14,43 +14,25 @@ import Footer from './components/ui/Footer';
 
 
 
-
 function App() {
-const [data, setData] = useState(null);
-const url = "https://api.jikan.moe/v4/seasons/now?limit=15"
-
-useEffect(() => {
-	fetch(url)
-	.then(response => response.json())
-	.then(response => {
-	  console.log(response);
-	  setData(response.data);
-	})
-	.catch(err => console.error(err));  
-  
-
-},[])
-  
-
+	const[loading, setLoading] = useState(true)
 
 
 {/*fetching data to be passed down to components*/}
 
-useEffect(()=>{
-	if(data){
-		console.log(data)
-	}
-},[data])
-
 	
-
+useEffect(()=>{
+	setTimeout(() => {
+		setLoading(true)
+	},500)
+},[])
 
 return (
 	<div className="h-full">
 		<Header />
-		{data?.length?(
+		{loading?(
 		<Carousel> 
-			<Content data = {data}/>
+			<Content />
 		</Carousel>
 	): (
 	<div className="flex justify-center items-center min-h-screen w-full h-full">
@@ -59,7 +41,7 @@ return (
 	)}
 	<TopAnime />
 	<TrialBox />
-	<NewEpisodes data = {data}/>
+	<NewEpisodes />
 	<Footer />
 	</div>
 
@@ -74,9 +56,18 @@ export default App
 
 
 
+//Old Jikan version API
 
 
+//const url = "https://api.jikan.moe/v4/seasons/now?limit=15"
 
+// fetch(url)
+// 	.then(response => response.json())
+// 	.then(response => {
+// 	  console.log(response);
+// 	  setData(response.data);
+// 	})
+// 	.catch(err => console.error(err)); 
 
 
 //Fetching and mapping logic first draft
