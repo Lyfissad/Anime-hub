@@ -4,60 +4,61 @@ import { FaInstagram } from "react-icons/fa";
 
 export default function Footer(){
     return(
-        <div className="bg-gradient-to-b from-vibeBlack to-darkCrim w-full py-12">
-  <div className="phone:grid phone:grid-cols-1 minitab:grid minitab:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
-    {/* Navigation Section */}
-    <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
-      <h3 className="text-text-pri font-semibold font-headings mb-4">Navigation</h3>
-      <ul className="text-text-mute font-playful phone:text-sm space-y-6">
-        <li>Browse Popular</li>
-        <li>Browse Categories</li>
-        <li>Release Calendar</li>
-      </ul>
-    </div>
-    <hr className="minitab:hidden mx-auto border-px border-lightGray w-[20rem]"></hr>
+    <div className="bg-gradient-to-b from-vibeBlack to-darkCrim w-full py-12">
+          <div className="phone:grid phone:grid-cols-1 minitab:grid minitab:grid-cols-3 gap-8 max-w-7xl mx-auto px-10">
+            {/* Navigation Section */}
+            <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
+              <h3 className="text-text-pri font-semibold font-headings mb-4">Navigation</h3>
+              <ul className="text-text-mute font-playful phone:text-sm space-y-6">
+                <li>Browse Popular</li>
+                <li>Browse Categories</li>
+                <li>Release Calendar</li>
+              </ul>
+            </div>
+            <hr className="minitab:hidden mx-auto  my-8 border-px border-lightGray w-[20rem]"></hr>
 
-    {/* Contact Us Section */}
-    <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
-      <h3 className="text-text-pri font-semibold font-headings mb-4">Contact Us</h3>
-      <ul className="text-text-mute font-playful text-sm space-y-6">
-        <li className="flex items-center">
-          <FaYoutube className="mr-7" /> YouTube
-        </li>
-        <li className="flex text-md items-center">
-          <FaFacebookSquare className="mr-7" /> Facebook
-        </li>
-        <li className="flex items-center">
-          <FaInstagram className="mr-7" /> Instagram
-        </li>
-      </ul>
-    </div>
-    <hr className="minitab:hidden mx-auto border-px border-lightGray w-[20rem]"></hr>
+            {/* Contact Us Section */}
+            <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
+              <h3 className="text-text-pri font-semibold font-headings mb-4">Contact Us</h3>
+              <ul className="text-text-mute font-playful text-sm space-y-6">
+                <li className="flex items-center">
+                  <FaYoutube className="mr-7" /> YouTube
+                </li>
+                <li className="flex items-center">
+                  <FaFacebookSquare className="mr-7" /> Facebook
+                </li>
+                <li className="flex items-center">
+                  <FaInstagram className="mr-7" /> Instagram
+                </li>
+              </ul>
+            </div>
+            <hr className="minitab:hidden mx-auto my-8 border-px border-lightGray w-[20rem]"></hr>
 
-    {/* Anime Hub Section */}
-    <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
-      <h3 className="text-text-pri font-semibold font-headings mb-4">Anime Hub</h3>
-      <ul className="text-text-mute font-playful phone:text-sm pc:text-md space-y-6">
-        <li>About Us</li>
-        <li>Help Center</li>
-        <li>Terms of Service</li>
-        <li>Privacy Policy</li>
-        <li>AdChoices</li>
-        <li>Press Inquiries</li>
-        <li>Get the App</li>
-        <li>Redeem Gift Cards</li>
-        <li>Index 2025: 72/100</li>
-      </ul>
-    </div>
+            {/* Anime Hub Section */}
+            <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
+              <h3 className="text-text-pri font-semibold font-headings mb-4">Anime Hub</h3>
+              <ul className="text-text-mute font-playful phone:text-sm pc:text-md space-y-6">
+                <li>About Us</li>
+                <li>Help Center</li>
+                <li>Terms of Service</li>
+                <li>Privacy Policy</li>
+                <li>AdChoices</li>
+                <li>Press Inquiries</li>
+                <li>Get the App</li>
+                <li>Redeem Gift Cards</li>
+                <li>Index 2025: 72/100</li>
+              </ul>
+            </div>
+          </div>
+          <hr className="mx-auto my-8 border-px border-lightGray phone:w-[20rem] minitab:w-[75%]"></hr>
+
+          {/* Footer Bottom */}
+          <div className="mt-12 text-center">
+            <h2 className="text-text-mute font-stretched text-3xl">SONY PICTURES</h2>
+            <p className="text-text-mute font-playful text-sm mt-2">@ Anime Hub, LLC</p>
+          </div>
+          <hr className="mx-auto my-8 border-px border-lightGray phone:w-[20rem] minitab:w-[75%]"></hr>
   </div>
-  <hr className="minitab:hidden mx-auto border-px border-lightGray w-[20rem]"></hr>
-
-  {/* Footer Bottom */}
-  <div className="mt-12 text-center">
-    <h2 className="text-text-mute font-stretched text-3xl">SONY PICTURES</h2>
-    <p className="text-text-mute font-playful text-sm mt-2">@ Anime Hub, LLC</p>
-  </div>
-</div>
 
 
     )

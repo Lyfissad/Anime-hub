@@ -1,40 +1,58 @@
 import { useEffect, useRef, useState } from "react"
-
+import { gql, useQuery } from "@apollo/client"
 
 
 
 export default function TopAnime(){
     const [topData,setTopdata] = useState(null)
-    const topUrl = "https://api.jikan.moe/v4/top/anime?limit=10"
     const [place,setPlace] = useState(true)
 
-
-    useEffect(()=>{
-        fetch(topUrl)
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            setTopdata(res.data)
-        })
-        .catch(err => console.log(err))
-    },[])
-
-    useEffect(()=>{
-	if(topData){
-		console.log(topData)
-	}
-},[topData])
-
-
-    useEffect(()=>{
-        setTimeout(()=>{
-            setPlace(false)
-        },600)
-    },[])
-
+    
+    const getTop = gql`
+            query{
+                Page(page:1, perPage: 20){
+                    media(type: ANIME, sort: SCORE_DESC){
+                    id
+                    title{
+                                romaji
+                                english
+                                native
+                            }
+                    averageScore
+                    status
+                    coverImage{
+                        medium
+                        large
+                    }
+                    genres
+                    }
+                }
+            }
+    `;
 
 
 
+    const {data, loading, error} = useQuery(getTop, {fetchPolicy: 'network-only'})
+
+    if(loading){
+        console.log("Loading...")
+    }
+
+
+    if (error) {
+        console.log("this shit didn't work bruv!!!:", error)
+    }
+
+        useEffect(() => {
+    if (!loading && data) {
+        setTopdata(data.Page.media);
+        setPlace(false);
+    }
+    }, [loading, data]);
+
+
+
+    {/*Entry logic for brightening*/}
     function Tiles ({item}){
         const [visible,setVisible] = useState(false)
         const ref = useRef()
@@ -51,16 +69,19 @@ export default function TopAnime(){
 
 
     return(
-        <div  ref={ref} className={`mt-8 min-w-[10rem] p-2 transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
-            <img className="h-60 w-full rounded-xl object-cover" src={item.images.webp.image_url} alt="" />
+        <div  ref={ref} className={`mt-8 min-w-[10rem] p-2 cursor-pointer
+         transition-all duration-200 ${visible? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
+            <img className="h-60 w-full rounded-xl object-cover" src={item.coverImage.large} alt="" />
             <div className="flex flex-col h-[5rem] justify-between">
-            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 text-sm whitespace-pre-wrap">{item.title}</h3>
-            <h4 className="text-text-mute pt-3 font-playful text-xs whitespace-pre-line">{item.genres[0].name}, {item.genres[1].name}, {item.genres[2].name}</h4>
+            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 text-sm whitespace-pre-wrap">{item.title.english || item.title.romanji || item.title.native}</h3>
+            <h4 className="text-text-mute pt-3 font-playful text-xs whitespace-pre-line">{item.genres[0]}, {item.genres[1]}</h4>
             </div>
         </div>
     )
     }
 
+
+    {/*Mapping over Tile component*/}
     const topContent = Array.isArray(topData)? topData.map((item, id) => (
         <Tiles item = {item} key={id}/>
     )) : null;
@@ -83,7 +104,29 @@ export default function TopAnime(){
             </h4>}
 
 
-            <div className="flex gap-8 overflow-x-auto whitespace-nowrap overflow-y-hidden scrollbar-hide h-[24rem]">{topContent}</div>
+            <div className="flex gap-8 overflow-x-auto whitespace-nowrap touch-pan-x overflow-y-hidden scrollbar-hide h-[24rem]">
+                {topContent? topContent : "loading"}
+            </div>
         </div>
     )
 }
+
+
+//OLDER JIKAN API VERSION
+
+// const topUrl = "https://api.jikan.moe/v4/top/anime?limit=10"
+//     useEffect(()=>{
+//         fetch(topUrl)
+//         .then(res => res.json())
+//         .then(res => {
+//             console.log(res)
+//             setTopdata(res.data)
+//         })
+//         .catch(err => console.log(err))
+//     },[])
+
+//     useEffect(()=>{
+// 	if(topData){
+// 		console.log(topData)
+// 	}
+// },[topData])

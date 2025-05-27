@@ -16,9 +16,9 @@ const Content = (props) => {
 const tiles = Array.isArray(props.data)
     ? props.data.map((item, index) => (
         <CarouselItem key={index} className="w-full">
-            <div className="relative min-h-[45rem] object-cover items-center justify-center w-full overflow-hidden">
+            <div className="relative phone:min-h-[45rem] minitab:h-[60rem] object-cover items-center justify-center w-full overflow-hidden">
                 <img
-                className="w-full h-[35rem] object-cover filter contrast-110 saturate-150"
+                className="w-full phone:h-[35rem] minitab:h-[45rem] object-cover filter contrast-110 saturate-150"
                 src={item.images.webp.large_image_url}
                 alt={item.title}
                 />

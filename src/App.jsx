@@ -14,6 +14,7 @@ import Footer from './components/ui/Footer';
 
 
 
+
 function App() {
 const [data, setData] = useState(null);
 const url = "https://api.jikan.moe/v4/seasons/now?limit=15"
@@ -32,6 +33,8 @@ useEffect(() => {
   
 
 
+
+{/*fetching data to be passed down to components*/}
 
 useEffect(()=>{
 	if(data){

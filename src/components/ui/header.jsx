@@ -51,9 +51,9 @@ export default function Header(){
                     </h1>
             </a>
              <ul className="phone:hidden minitab:flex space-x-5 text-md ml-12 text-text-pri font-playful">
-                    <li className="h-13 px-5 flex items-center hover:bg-vibeBlack text-center">New</li>
-                    <li className="h-13 px-5 flex items-center hover:bg-vibeBlack text-center">Popular</li>
-                    <li className="h-13 px-5 flex items-center hover:bg-vibeBlack text-center">Browse all</li>
+                    <li className="h-13 px-5 flex items-center cursor-pointer hover:bg-vibeBlack text-center">New</li>
+                    <li className="h-13 px-5 flex items-center cursor-pointer hover:bg-vibeBlack text-center">Popular</li>
+                    <li className="h-13 px-5 flex items-center cursor-pointer hover:bg-vibeBlack text-center">Browse all</li>
                 </ul>
             <input type="text" placeholder="Search" className={`ml-auto h-8 border-2 border-text-mute outline-none
                  active:border-crimAccent transition-all duration-300 ease-in-out focus:border-crimAccent

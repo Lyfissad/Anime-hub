@@ -75,7 +75,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .spinFast{
-  animation: spinFast 0.5s ease-in-out;
+  animation: spinFast 0.5s ease-in-out infinite;
 }
 
 @keyframes fade-in{
@@ -83,6 +83,9 @@ body::-webkit-scrollbar-thumb {
   to {opacity: 1;}
 }
 
+.touch-pan-x {
+  touch-action: pan-x;
+}
 
 
 .fade-in{
