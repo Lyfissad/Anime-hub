@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './App.css'
 import Header from './components/ui/header';
 import {
@@ -10,35 +9,28 @@ import {
 import TrialBox from './components/ui/trialBox';
 import NewEpisodes from './components/ui/NewEpisodes';
 import Footer from './components/ui/Footer';
+import { Suspense } from 'react';
 
 
 
 
 function App() {
-	const[loading, setLoading] = useState(true)
 
 
 {/*fetching data to be passed down to components*/}
 
 	
-useEffect(()=>{
-	setTimeout(() => {
-		setLoading(true)
-	},500)
-},[])
 
 return (
 	<div className="h-full">
 		<Header />
-		{loading?(
-		<Carousel> 
-			<Content />
+		<Carousel>
+			<Suspense fallback = {<div className="flex justify-center items-center min-h-screen w-full h-full">
+                    <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
+                </div>}> 
+				<Content />
+			</Suspense>
 		</Carousel>
-	): (
-	<div className="flex justify-center items-center min-h-screen w-full h-full">
-	<AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
-	</div>
-	)}
 	<TopAnime />
 	<TrialBox />
 	<NewEpisodes />

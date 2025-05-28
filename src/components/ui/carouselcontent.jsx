@@ -6,11 +6,12 @@ import {
   } from "@/components/ui/carousel"
   import { FaCirclePlay } from "react-icons/fa6";
   import { IoPlayOutline } from "react-icons/io5";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useSuspenseQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-
-
-
+import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai";
+import BannerOverlay from "../BannerOverlay";
+import TrailerButton from "../TrailerButton";
 
 const Content = () => {
     const [seasonalData, setSeasonalData] = useState(null)
@@ -36,6 +37,7 @@ const Content = () => {
                     }
                     bannerImage
                     averageScore
+                    description
                     trailer{
                         id
                         site
@@ -47,77 +49,66 @@ const Content = () => {
         }
     `
 
-    const {data, loading, error} = useQuery(seasonal)
+    const {data} = useSuspenseQuery(seasonal,{fetchPolicy: "cache-first"})
 
 
     useEffect(()=>{
-        if(error){
-            console.error("Carousel content error:", error)
-        }
 
-        if(data && !loading){
+        if(data){
             console.log(data)
             setSeasonalData(data.Page.media)
         }
 
-    },[data, loading, error])
+    },[data])
 
     
 
-    const TrailerButton = ({ trailer }) => {
-        const getTrailerURL = () => {
-            if(!trailer) return null;
+    
 
-        switch(trailer?.site?.toLowerCase()){
-            case "youtube":
-                return `https://www.youtube.com/watch?v=${trailer.id}`;
-            case "dailymotion":
-                return `https://www.dailymotion.com/video/${trailer.id}`;
-            default:
-                return null;
-        }
-        }
 
-        const trailerURL = getTrailerURL()
-        
-        return(
-            <button  
-            className='font-playful text-vibeBlack cursor-pointer font-extrabold'
-             onClick={() => {
-                if(trailerURL){
-                    window.open(trailerURL, "_blank")
-                }
-                else{
-                    alert("No trailer Available")
-                }
-            }}>{trailerURL? "Watch Trailer" : "No Trailers"}
-            </button>
-        );
-    };
+
 
 
 const tiles = Array.isArray(seasonalData)
     ? seasonalData.map((item) => (
         <CarouselItem key={item.id} className="w-full">
-            <div className="relative phone:min-h-[45rem] minitab:h-[60rem] object-cover items-center justify-center w-full overflow-hidden">
+            <div className="relative phone:min-h-[45rem] minitab:h-[60rem] object-cover 
+                items-center justify-center w-full overflow-hidden">
+                
+                {/* Small screens */}
                 <img
-                className="w-full phone:block phone:h-[35rem] minitab:h-[45rem] object-cover filter blur-xs contrast-110 saturate-150"
-                src={item.coverImage.extraLarge}
-                alt={item.title.english || item.title.romaji || item.title.native}
+                    className="w-full phone:block minitab:hidden phone:h-[35rem] minitab:h-[45rem] object-cover
+                    filter contrast-110 saturate-150"
+                    src={item.coverImage.extraLarge}
+                    alt={item.title.english || item.title.romaji || item.title.native}
                 />
+
+                {/* Larger screens with cropping */}
+                <img
+                    className="w-[140%] phone:hidden minitab:block phone:h-[35rem] minitab:h-[45rem] object-cover
+                    object-center filter blur-xs contrast-110 saturate-150"
+                    src={item.bannerImage ? item.bannerImage : item.coverImage.extraLarge}
+                    alt={item.title.english || item.title.romaji || item.title.native}
+                />
+                <BannerOverlay
+                    trailer = {item.trailer}
+                    title = {item.title.english || item.title.romaji || item.title.native}
+                    averageScore = {item.averageScore} 
+                    description = {item.description}/>
                 <div
-                    className="absolute top-0 left-0 w-full phone:h-[78%] minitab:h-[93%] bg-gradient-to-b"
+                    className="absolute top-0 left-0 w-full phone:h-[78%] minitab:h-[76%] bg-gradient-to-b"
                     style={{
                     background: 'linear-gradient(to bottom, transparent 85%, #000000 100%)',
                     opacity: 1
                     }}
                 ></div>
-                <div className="phone:bg-crimAccent phone:block minitab:hidden w-full h-8 absolute flex items-center space-x-20 justify-center px-4">
+                <div className="phone:bg-crimAccent phone:block minitab:invisible 
+                w-full h-8 absolute flex items-center space-x-20 justify-center px-4">
                     <TrailerButton trailer={item.trailer}/>
-                    <p className='text-crimAccent font-playful text-vibeBlack mr-8'>Rating: {item.averageScore}</p>
+                    <div className='text-crimAccent flex items-center justify-center font-playful text-vibeBlack mr-8'>{<AiOutlineStar className="mr-1" />} { item.averageScore}</div>
                 </div>
-                <button onClick={()=>{alert("Not implemented yet,Sorry.")}} className="phone:w-80 minitab:w-100 h-10 flex items-center justify-center
-                 relative top-12 text-md bg-crimAccent border-4 border-vibeBlack
+                <button onClick={()=>{alert("Not implemented yet,Sorry.")}} className="phone:w-80 minitab:invisible h-10 flex
+                 items-center justify-center relative top-12 text-md bg-crimAccent border-4 border-vibeBlack
                   font-headings rounded-md text-vibeBlack mx-auto gap-2">
                     <IoPlayOutline className="size-7 fill-vibeBlack"/>START WATCHING
                 </button>
@@ -131,7 +122,10 @@ const tiles = Array.isArray(seasonalData)
     return(
         <div>
         <CarouselContent className="fade-in min-h-5/6">
-                {tiles}
+                {seasonalData? tiles : 
+                <div className="flex justify-center items-center min-h-screen w-full h-full">
+                    <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
+                </div>}
         </CarouselContent>
                 <div className="flex justify-between items-center w-full">
         <CarouselPrevious className="bg-white text-black fade-in hover:bg-gray-200 rounded-full phone:invisible md:visible shadow-md ml-20 mr-auto" />

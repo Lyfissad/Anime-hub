@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
-import { gql, useQuery } from "@apollo/client"
+import { Suspense, useEffect, useRef, useState } from "react"
+import { gql, useSuspenseQuery } from "@apollo/client"
 
 
 
@@ -32,23 +32,15 @@ export default function TopAnime(){
 
 
 
-    const {data, loading, error} = useQuery(getTop, {fetchPolicy: 'network-only'})
+    const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'network-only'})
 
-    if(loading){
-        console.log("Loading...")
-    }
-
-
-    if (error) {
-        console.log("this shit didn't work bruv!!!:", error)
-    }
 
         useEffect(() => {
-    if (!loading && data) {
+    if (data) {
         setTopdata(data.Page.media);
         setPlace(false);
     }
-    }, [loading, data]);
+    }, [data]);
 
 
 
@@ -70,6 +62,7 @@ export default function TopAnime(){
     }, [])
 
 
+
     return(
         <div ref={ref} className={`mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
             transition-all transition-filter ease-in-out duration-300 ${visible ? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
@@ -82,6 +75,13 @@ export default function TopAnime(){
     )
     }
 
+    function TopPlaceHolder(){
+            <div className={`mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
+            transition-all  bg-neutral-800 animate-pulse transition-filter ease-in-out duration-300`}></div>
+    }
+
+
+    const placeHolderTiles = Array.from({length : 20}, (_, i) => <TopPlaceHolder key = {i} /> )
 
     {/*Mapping over Tile component*/}
     const topContent = Array.isArray(topData)? topData.map((item, id) => (
@@ -107,7 +107,10 @@ export default function TopAnime(){
 
 
             <div className="flex gap-8 overflow-x-auto whitespace-nowrap touch-pan-x overflow-y-hidden scrollbar-hide min-h-[24rem]">
-                {topContent? topContent : "loading"}
+                {
+                <Suspense fallback={placeHolderTiles}>
+                {topContent}
+                </Suspense>}
             </div>
         </div>
     )
