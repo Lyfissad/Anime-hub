@@ -17,7 +17,7 @@ import { Suspense } from 'react';
 function App() {
 
 
-{/*fetching data to be passed down to components*/}
+{/*fetching data moved to other components*/}
 
 	
 

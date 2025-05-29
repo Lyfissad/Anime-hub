@@ -3,6 +3,8 @@
 
 
 export default function TrailerButton({ trailer }){
+
+        //trailer URL
         const getTrailerURL = () => {
             if(!trailer) return null;
 

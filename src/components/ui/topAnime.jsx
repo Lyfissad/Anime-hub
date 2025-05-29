@@ -1,13 +1,13 @@
 import { Suspense, useEffect, useRef, useState } from "react"
 import { gql, useSuspenseQuery } from "@apollo/client"
-
+import { StringCleanDescription } from "../BannerOverlay"
 
 
 export default function TopAnime(){
     const [topData,setTopdata] = useState(null)
     const [place,setPlace] = useState(true)
 
-    
+    //query for top anime by ranking
     const getTop = gql`
             query{
                 Page(page:1, perPage: 20){
@@ -20,8 +20,8 @@ export default function TopAnime(){
                             }
                     averageScore
                     status
+                    description
                     coverImage{
-                        large
                         extraLarge
                     }
                     genres
@@ -44,7 +44,7 @@ export default function TopAnime(){
 
 
 
-    {/*Entry logic for brightening*/}
+    {/*Entry logic for brightening using intersectionObserver*/}
     function Tiles ({item}){
         const [visible,setVisible] = useState(false)
         const ref = useRef()
@@ -55,24 +55,50 @@ export default function TopAnime(){
             { threshold: [0.4, 0.6, 0.8] }
         )
         if(ref.current)observer.observe(ref.current)
+            const currentREf = ref.current
             return  () => {
-        if (ref.current) observer.unobserve(ref.current);
+        if (currentREf) observer.unobserve(currentREf);
     };
 
     }, [])
 
 
 
-    return(
-        <div ref={ref} className={`mt-8 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
-            transition-all transition-filter ease-in-out duration-300 ${visible ? "brightness-100 scale-103" : "brightness-50 scale-100"}`}>
-            <img className="phone:h-60 minitab:h-80 w-full rounded-xl object-cover" src={item.coverImage.extraLarge} alt="Cover Picture" />
-            <div className="flex flex-col min-h-[5rem] justify-between">
-            <h3 className="text-text-pri mt-3 font-headings line-clamp-2 phone:text-sm minitab:text-base whitespace-pre-wrap">{item.title.english || item.title.romanji || item.title.native}</h3>
-            <h4 className="text-text-mute pt-3 font-playful phone:text-xs minitab:text-sm whitespace-pre-line">{item.genres[0]}, {item.genres[1]}</h4>
-            </div>
-        </div>
-    )
+            return (
+                    <div
+                        ref={ref}
+                        className={`mt-8 relative group z-10 phone:min-w-[10rem] phone:h-[22rem] minitab:min-h-[30rem] overflow-visible minitab:min-w-[15rem] p-2 cursor-pointer
+                        transition-all transition-filter ease-in-out duration-300 group ${visible ? "brightness-100 scale-103" : "brightness-50 scale-100"}`}
+                    >
+                        {/* Hover overlay */}
+                        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-50 rounded-xl p-3 overflow-hidden">
+                        <div className="w-full h-1/3 overflow-hidden">
+                            <p className="text-text-pri text-xs leading-snug break-words whitespace-pre-wrap w-full max-w-full">
+                            {StringCleanDescription(item.description)}
+                            </p>
+                        </div>
+                        </div>
+
+
+                        {/* Image */}
+                        <img
+                        className="phone:h-60 minitab:h-80 w-full rounded-xl object-cover"
+                        src={item.coverImage.extraLarge}
+                        alt="Cover"
+                        />
+
+                        {/* Text */}
+                        <div className="flex flex-col min-h-[5rem] justify-between relative z-60">
+                        <h3 className="text-text-pri mt-3 font-headings line-clamp-2 phone:text-sm minitab:text-base whitespace-pre-wrap">
+                            {item.title.english || item.title.romanji || item.title.native}
+                        </h3>
+                        <h4 className="text-text-mute pt-3 font-playful phone:text-xs minitab:text-sm whitespace-pre-line">
+                            {item.genres[0]}, {item.genres[1]}
+                        </h4>
+                        </div>
+                    </div>
+        );
+
     }
 
     function TopPlaceHolder(){

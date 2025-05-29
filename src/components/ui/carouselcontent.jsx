@@ -16,7 +16,7 @@ import TrailerButton from "../TrailerButton";
 const Content = () => {
     const [seasonalData, setSeasonalData] = useState(null)
 
-
+//fetching query for seasonal anime year 2025
     const seasonal = gql`
         query{
             Page(page: 1, perPage: 15){
@@ -68,7 +68,7 @@ const Content = () => {
 
 
 
-
+//mapping over seasonalData
 const tiles = Array.isArray(seasonalData)
     ? seasonalData.map((item) => (
         <CarouselItem key={item.id} className="w-full">
@@ -127,9 +127,9 @@ const tiles = Array.isArray(seasonalData)
                     <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
                 </div>}
         </CarouselContent>
-                <div className="flex justify-between items-center w-full">
-        <CarouselPrevious className="bg-white text-black fade-in hover:bg-gray-200 rounded-full phone:invisible md:visible shadow-md ml-20 mr-auto" />
-        <CarouselNext className="bg-white text-black fade-in hover:bg-gray-200 rounded-full phone:invisible md:visible shadow-md ml-auto mr-20" />
+        <div className="flex cursor-pointer shadow-none outline-none bg-none border-none justify-between absolute bottom-150 items-center w-full">
+        <CarouselPrevious className="bg-transparent text-black fade-in hover:bg-gray-200 phone:invisible minitab:visible  ml-20 mr-auto" />
+        <CarouselNext className="bg-transparent text-black fade-in hover:bg-gray-200 phone:invisible minitab:visible shadow-md ml-auto mr-20" />
         </div>
         </div>
     )
