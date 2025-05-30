@@ -26,7 +26,7 @@ export default function Header(){
 
             <Drawer className = "">
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
-            <DrawerContent className="h-[70%] bg-black">
+            <DrawerContent className="h-[70%] bg-vibeBlack">
                 <ul className="space-y-4 text-xl ml-12 mt-4 text-text-pri font-playful">
                     <li className="">New</li>
                     <li className="">Popular</li>

@@ -1,11 +1,27 @@
 import { Suspense, useEffect, useRef, useState } from "react"
 import { gql, useSuspenseQuery } from "@apollo/client"
 import { StringCleanDescription } from "../BannerOverlay"
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+import AnimeInfoDrawer from "./AnimeInfoDrawer"
+import { ErrorBoundary } from "../ErrorBoundary"
 
+
+  export function SliceStingByWords(str, count){
+            const words = str.trim().split(/\s+/)
+            if (words.length <= count) return str
+            return words.slice(0, count).join(" ") + "..."
+        }
 
 export default function TopAnime(){
     const [topData,setTopdata] = useState(null)
     const [place,setPlace] = useState(true)
+    const [selected, setSelected] = useState(null)
+    const [isOpen, setIsOpen] = useState(false)
 
     //query for top anime by ranking
     const getTop = gql`
@@ -21,6 +37,12 @@ export default function TopAnime(){
                     averageScore
                     status
                     description
+                    trailer{
+                        id
+                        site
+                    }
+                    episodes
+                    bannerImage
                     coverImage{
                         extraLarge
                     }
@@ -30,6 +52,7 @@ export default function TopAnime(){
             }
     `;
 
+    
 
 
     const {data} = useSuspenseQuery(getTop, {fetchPolicy: 'network-only'})
@@ -62,6 +85,10 @@ export default function TopAnime(){
 
     }, [])
 
+        {/*Word slicing method*/}
+        
+
+
 
 
             return (
@@ -71,10 +98,12 @@ export default function TopAnime(){
                         transition-all transition-filter ease-in-out duration-300 group ${visible ? "brightness-100 scale-103" : "brightness-50 scale-100"}`}
                     >
                         {/* Hover overlay */}
-                        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-50 rounded-xl p-3 overflow-hidden">
-                        <div className="w-full h-1/3 overflow-hidden">
-                            <p className="text-text-pri text-xs leading-snug break-words whitespace-pre-wrap w-full max-w-full">
-                            {StringCleanDescription(item.description)}
+                        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-85 transition-opacity duration-300 z-50 rounded-xl p-3 overflow-hidden">
+                        <div className="w-full h-3/5 space-y-2 overflow-hidden">
+                            <h3 className="text-base text-text-pri">{item.title.english || item.title.romanji || item.title.native}</h3>
+                            <h4 className="text-sm text-text-mute">{item.episodes} Episodes</h4>
+                            <p className="text-text-mute text-xs leading-snug break-words whitespace-pre-wrap w-full max-w-full">
+                            {StringCleanDescription(SliceStingByWords(item.description, 40))}
                             </p>
                         </div>
                         </div>
@@ -111,7 +140,14 @@ export default function TopAnime(){
 
     {/*Mapping over Tile component*/}
     const topContent = Array.isArray(topData)? topData.map((item, id) => (
-        <Tiles item = {item} key={id}/>
+            <DrawerTrigger asChild key = {id}>
+                <div onClick={()=> {
+                    setSelected(item)
+                    setIsOpen(true)
+                }}>
+                    <Tiles item = {item} key={id}/>
+                </div>
+            </DrawerTrigger>
     )) : null;
 
 
@@ -131,13 +167,19 @@ export default function TopAnime(){
                 Enjoy the best anime experience with the highest rated shows voted by you.
             </h4>}
 
-
+            <Drawer>
             <div className="flex gap-8 overflow-x-auto whitespace-nowrap touch-pan-x overflow-y-hidden scrollbar-hide min-h-[24rem]">
                 {
                 <Suspense fallback={placeHolderTiles}>
                 {topContent}
                 </Suspense>}
             </div>
+            <DrawerContent className={"bg-vibeBlack border-none minitab:w-[60%] h-[70%] mx-auto"}>
+                <ErrorBoundary>
+                    {selected && isOpen && <AnimeInfoDrawer item={selected} />}
+                </ErrorBoundary>
+            </DrawerContent>
+            </Drawer>
         </div>
     )
 }

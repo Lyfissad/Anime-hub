@@ -106,7 +106,9 @@ export default function NewEpisodes(){
                 (place && NewEpiContent? NewEpiContent : placeTilesSection) : null}
             </div>
         </div>
-        <button className="bg-crimAccent flex items-center justify-center my-15 mx-auto text-vibeBlack font-headings phone:w-[20rem] minitab:w-[32rem] h-[3rem]">SHOW MORE</button>
+        <button 
+        onClick={()=>{alert("Not implemented yet-Available soon.")}}
+        className="bg-crimAccent flex items-center cursor-pointer justify-center my-15 mx-auto text-vibeBlack font-headings phone:w-[20rem] minitab:w-[32rem] h-[3rem]">SHOW MORE</button>
         </div>
     )
 }
