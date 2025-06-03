@@ -4,7 +4,6 @@ import {
 	CarouselNext,
 	CarouselPrevious,
   } from "@/components/ui/carousel"
-  import { FaCirclePlay } from "react-icons/fa6";
   import { IoPlayOutline } from "react-icons/io5";
 import { gql, useSuspenseQuery } from "@apollo/client";
 import { useEffect, useState } from "react";

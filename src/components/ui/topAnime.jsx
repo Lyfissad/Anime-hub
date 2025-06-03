@@ -174,9 +174,11 @@ export default function TopAnime(){
                 {topContent}
                 </Suspense>}
             </div>
-            <DrawerContent className={"bg-vibeBlack border-none minitab:w-[60%] h-[70%] mx-auto"}>
+            <DrawerContent className={"bg-vibeBlack border-none minitab:max-w-[60%] h-[80%] mx-auto"}>
                 <ErrorBoundary>
+                    <Suspense fallback={<div>Loading...</div>}>
                     {selected && isOpen && <AnimeInfoDrawer item={selected} />}
+                    </Suspense>
                 </ErrorBoundary>
             </DrawerContent>
             </Drawer>
