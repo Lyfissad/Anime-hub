@@ -3,12 +3,13 @@ import { ImTv } from "react-icons/im";
 import { gql, useQuery } from "@apollo/client";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import AnimeInfoDrawer from "./AnimeInfoDrawer";
 import { ErrorBoundary } from "../ErrorBoundary";
+import { AiOutlineLoading } from "react-icons/ai";
+
 
 const PLACEHOLDERS = Array.from({ length: 5 }, (_, i) => (
   <div
@@ -81,9 +82,13 @@ function EpisodesTiles({ item }) {
 }
 
 export default function NewEpisodes() {
+  const [loadingMore, setLoadingMore] = useState(false)
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  const ButtonLoadState = loadingMore? <AiOutlineLoading className="fill-vibeBlack size-8 animate-spin"/> : "SHOW MORE"
+
 
   const { data, loading, fetchMore } = useQuery(newEpisodes, {
     variables: { page: 1 },
@@ -92,8 +97,9 @@ export default function NewEpisodes() {
 
   const allEpisodes = data?.Page?.media || [];
 
-  const handlePageChange = () => {
-    fetchMore({
+  const handlePageChange = async () => {
+    setLoadingMore(true)
+    await fetchMore({
       variables: { page: page + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
@@ -107,6 +113,7 @@ export default function NewEpisodes() {
       },
     });
     setPage((p) => p + 1);
+    setLoadingMore(false)
   };
 
   const EpisodeTilesUI = allEpisodes.map((item) => (
@@ -151,7 +158,7 @@ export default function NewEpisodes() {
         onClick={handlePageChange}
         className="bg-crimAccent flex items-center cursor-pointer justify-center my-15 mx-auto text-vibeBlack font-headings phone:w-[20rem] minitab:w-[32rem] h-[3rem]"
       >
-        SHOW MORE
+        {ButtonLoadState}
       </button>
     </div>
   );
