@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import authBackground from "../assets/authbackground.jpg"
+import authBackground from "../assets/authBackground.jpg"
 import logo from "@/assets/icon-anime.svg";
 import { useLocation } from "react-router-dom";
 
