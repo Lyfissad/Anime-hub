@@ -1,99 +1,24 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import SignUp from "./Pages/SignUp";
+import Login from "./Pages/Login";
 import './App.css'
-import Header from './components/ui/header';
-import {
-	Carousel
-  } from "@/components/ui/carousel"
-  import { AiOutlineLoading } from "react-icons/ai";
-  import Content from "./components/ui/carouselcontent.jsx"
-  import TopAnime from './components/ui/topAnime';
-import TrialBox from './components/ui/trialBox';
-import NewEpisodes from './components/ui/NewEpisodes';
-import Footer from './components/ui/Footer';
-import { Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Authenticate from "./Pages/Authenticate";
 
 
-
-
-function App() {
-
-
-{/*fetching data moved to other components*/}
-
-	
-
-return (
-	<div className="h-full">
-		<Header />
-		<Carousel>
-			<Suspense fallback = {<div className="flex justify-center items-center min-h-screen w-full h-full">
-                    <AiOutlineLoading className='fill-crimAccent size-18 spinFast m-auto'/>
-                </div>}> 
-				<Content />
-			</Suspense>
-		</Carousel>
-	<TopAnime />
-	<TrialBox />
-	<NewEpisodes />
-	<Footer />
-	</div>
-
-
-);
-
+export default function App(){
+	return(
+		<>
+		<ToastContainer />
+		<Routes>
+			<Route index element = {<Home />} />
+			<Route path="/auth" element = {<Authenticate />}>
+				<Route path="signup" element = {<SignUp />} />
+				<Route path="login" element = {<Login />} />
+			</Route>
+		</Routes>
+		</>
+	)
 }
-
-export default App
-
-
-
-
-
-//Old Jikan version API
-
-
-//const url = "https://api.jikan.moe/v4/seasons/now?limit=15"
-
-// fetch(url)
-// 	.then(response => response.json())
-// 	.then(response => {
-// 	  console.log(response);
-// 	  setData(response.data);
-// 	})
-// 	.catch(err => console.error(err)); 
-
-
-//Fetching and mapping logic first draft
-
-	
-
-
-// <>
-//     <h1>Anime List Bitch</h1>
-//     {data? data.data.map((item) => ( 
-//     <div className="container">
-//       <h1>{item.title}</h1>
-//       <p>{item.synopsis}</p>
-//       <img src={item.image} alt="{item.title}" />
-//     </div>
-//   )
-// )
-// : <h1>Loading</h1>
-// }
-//   </>
-
-
-
-
-
-
-// {data && data.data ? (
-//   data.data.map((item) => (
-//     <div className="container" key={item.id}>
-//       <h2>{item.title}</h2>
-//       <p>{item.synopsis}</p>
-//       <img src={item.image} alt={item.title} />
-//     </div>
-//   ))
-// ) : (
-//   <p>Loading...</p>
-// )}

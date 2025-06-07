@@ -12,7 +12,8 @@ import {
   } from "@/components/ui/drawer"
 import { useState } from "react";
 import logo from "@/assets/icon-anime.svg"; 
-import SignUp from "./SignUp";
+import SignUp from "../../Pages/SignUp";
+import { Link } from "react-router-dom";
 
 
   
@@ -26,10 +27,14 @@ export default function Header(){
             <Drawer className = "">
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
             <DrawerContent className="h-[70%] bg-vibeBlack">
-                <SignUp />
+                <Link to={"/auth/login"} className="h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings">Login/SignUp</Link>
+                <ul className="space-y-4 text-xl ml-12 mt-4 text-text-pri font-playful">
+                    <li className="">New</li>
+                    <li className="">Popular</li>
+                    <li className="">Browse all</li>
+                </ul>
             </DrawerContent>
             </Drawer>
-
             <a href="https://anime-hub-ebon.vercel.app/" className="cursor-pointer">
                 <img src={logo} alt="logo" className="h-10 w-auto ml-2" />
             </a>
@@ -60,8 +65,4 @@ export default function Header(){
 }
 
 
-{/*<ul className="space-y-4 text-xl ml-12 mt-4 text-text-pri font-playful">
-                    <li className="">New</li>
-                    <li className="">Popular</li>
-                    <li className="">Browse all</li>
-                </ul>*/}
+{/**/}
