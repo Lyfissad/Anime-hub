@@ -10,29 +10,40 @@ import {
     DrawerTitle,
     DrawerTrigger,
   } from "@/components/ui/drawer"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { useState } from "react";
 import logo from "@/assets/icon-anime.svg"; 
-import SignUp from "../../Pages/SignUp";
 import { Link } from "react-router-dom";
-
+import { CgProfile } from "react-icons/cg";
+import { useAuth } from "@/Context/useAuth";
 
   
 
 
 export default function Header(){
     const [searchActive,setSearchActive] = useState(false)
+    const { user, logOut } = useAuth()
     return(
         <div className="flex justify-center items-center bg-grayish h-13 p-4 w-full">
 
             <Drawer className = "">
             <DrawerTrigger><SlMenu className = "fill-crimAccent size-8 phone:block minitab:hidden"/></DrawerTrigger>
-            <DrawerContent className="h-[70%] bg-vibeBlack">
-                <Link to={"/auth/login"} className="h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings">Login/SignUp</Link>
-                <ul className="space-y-4 text-xl ml-12 mt-4 text-text-pri font-playful">
+            <DrawerContent className="h-[70%] bg-vibeBlack fade-in">
+                {user? 
+                <div>
+                    <h1 className="text-darkCrim mt-4 ml-12 text-3xl font-headings">Welcome back</h1>
+                    <h1 className="text-text-pri my-8 ml-12 text-xl font-playful"> {user.username}</h1>
+                </div> : <Link to={"/auth/login"} className="h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings">Login/SignUp</Link>}
+                <ul className="space-y-5 text-xl ml-12 mt-4 text-text-pri font-playful">
                     <li className="">New</li>
                     <li className="">Popular</li>
                     <li className="">Browse all</li>
                 </ul>
+                {user? <button className="h-10 w-40 my-15 text-center flex items-center justify-center bg-darkCrim mx-auto rounded-3xl text-text-pri font-headings" onClick={logOut}>Log Out</button> : null}
             </DrawerContent>
             </Drawer>
             <a href="https://anime-hub-ebon.vercel.app/" className="cursor-pointer">
@@ -59,7 +70,22 @@ export default function Header(){
                  active:border-crimAccent transition-all duration-300 ease-in-out focus:border-crimAccent
                   rounded-sm p-3 ${searchActive? 'text-white opacity-100 phone:w-2/3 minitab:w-1/6 tab:w-2/6': 'w-0 overflow-hidden opacity-0'}`}/>
 
-            <IoMdSearch className="size-9 fill-crimAccent ml-2 justify-center cursor-pointer" onClick={()=>setSearchActive(!searchActive)}/>
+            <IoMdSearch className="size-9 fill-crimAccent ml-3 justify-center cursor-pointer" onClick={()=>setSearchActive(!searchActive)}/>
+
+            {user? 
+            <Popover>
+                <PopoverTrigger>
+                    <CgProfile className="size-10 mr-1 ml-2 text-text-pri phone:hidden minitab:flex cursor-pointer" />
+                </PopoverTrigger>
+                <PopoverContent className={`bg-vibeBlack outline-none shadow-none`}>
+                        <ul>
+                            <li className="mb-5 cursor-pointer hover:text-crimAccent bg-vibeBlack text-text-pri font-playful">{user.username}</li>
+                            <li className="mb-5 cursor-pointer hover:text-crimAccent bg-vibeBlack text-text-pri font-playful">Setting</li>
+                            <li  onClick={logOut} className="cursor-pointer hover:text-crimAccent bg-vibeBlack text-text-pri font-playful">Log Out</li>
+                        </ul>
+                </PopoverContent>
+            </Popover> : 
+            <Link to={"/auth/login"} className="h-8 w-35 text-center phone:hidden minitab:flex items-center justify-center bg-darkCrim ml-2 rounded-lg text-text-pri font-playful">Login/SignUp</Link>}
         </div>
     )
 }

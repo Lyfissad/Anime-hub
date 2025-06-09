@@ -1,3 +1,4 @@
+import { useAuth } from "@/Context/useAuth";
 import { useState } from "react"
 import React from "react"
 import { AiOutlineLoading } from "react-icons/ai";
@@ -6,6 +7,7 @@ import { toast } from "react-toastify";
 
 export default function Login() {
     const [Loading, setLoading] = useState(false)
+    const { login } = useAuth()
     const [loginData, setLoginData] = useState({
         username: "",
         password: "",
@@ -53,6 +55,8 @@ export default function Login() {
         })
         setLoading(false)
         if(res.ok){
+            console.log("User after login:", data.User);
+            login(data.User)
             navigate("/")
         }
     }

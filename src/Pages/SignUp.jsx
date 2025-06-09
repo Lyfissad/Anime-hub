@@ -126,13 +126,6 @@ export default function SignUp() {
                 onChange={handleChange} 
                 className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
             />
-            <input 
-                name = "preferences" 
-                value={signupData.preferences}
-                placeholder = "Preferences" 
-                onChange={handleChange} 
-                className="w-full bg-vibeBlack px-4 py-2 rounded-md my-2 border border-darkCrim focus:outline-none focus:ring-2 focus:ring-crimAccent"
-            />
             <button type = "submit" disabled = {loading} className="mt-4 p-3 cursor-pointer rounded-md bg-crimAccent hover:bg-crimAccent/90 text-vibeBlack font-headings">{buttonState}</button>
         </form>
     )

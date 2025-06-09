@@ -9,7 +9,7 @@ export default function Authenticate(){
     const loginMode = location.pathname.endsWith("/login");
 
     return(
-        <div className="relative w-full h-screen flex items-center justify-center">
+        <div className="relative w-full h-screen bg-vibeBlack flex items-center fade-in justify-center">
             <img src={authBackground} alt="background" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
             <div className="relative z-10 phone:max-w-[80%] minitab:min-w-100">
                 <Link to={"/"}><img src={logo} alt="logo" className="size-40 mb-5 mx-auto"/></Link>
@@ -17,18 +17,18 @@ export default function Authenticate(){
                 <div className="flex gap-4 justify-center items-center my-12">
                     <Link
                     to="login"
-                    className={`h-10 phone:w-50 minitab:w-40 rounded-3xl text-center flex items-center justify-center transition-all duration-200
+                    className={`h-10 phone:w-50 minitab:w-40 rounded-lg text-center flex items-center justify-center transition-all duration-200
                     ${loginMode 
-                    ? "bg-darkCrim text-white -translate-y-2 shadow-lg"
+                    ? "bg-darkCrim text-white -translate-y-3 shadow-lg"
                     : "bg-vibeBlack text-text-pri hover:bg-crimAccent"}`}>
                     Log In
                     </Link>
                     <Link 
                     to="signup" 
-                    className={`h-10 phone:w-50 minitab:w-40 rounded-3xl text-center flex items-center justify-center transition-all duration-200
+                    className={`h-10 phone:w-50 minitab:w-40 rounded-lg text-center flex items-center justify-center transition-all duration-200
                     ${loginMode 
                     ? "bg-vibeBlack text-text-pri hover:bg-crimAccent"
-                    : "bg-darkCrim text-white -translate-y-2 shadow-lg"}`}>
+                    : "bg-darkCrim text-white -translate-y-3 shadow-lg"}`}>
                     Sign up
                     </Link>
                 </div>
