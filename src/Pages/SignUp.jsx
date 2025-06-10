@@ -4,8 +4,31 @@ import { toast } from "react-toastify"
 import { AiOutlineLoading } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
+
+
+function validatePassword(pass, confirm){
+            const Errors = []
+            if (pass !== confirm){
+                Errors.push("Passwords don't match!")
+            }
+            if (pass.length < 8){
+                Errors.push("Passwords too short, needs to be 8 characters!")
+            }
+            if(!/[a-z]/.test(pass)){
+                Errors.push("Passwords must contain at least one lowercase letter!")
+            }
+            if(!/[A-Z]/.test(pass)){
+                Errors.push("Passwords must contain at least one uppercase letter!")
+            }
+            if(!/\d/.test(pass)){
+                Errors.push("Passwords must contain at least one number!")
+            }
+            return Errors
+        }
+
 export default function SignUp() {
     const [loading, setLoading] = useState(false)
+    const [PasswordErrors, setPasswordErrors] = useState([])
     const [signupData, setSignupData] = useState({
         username: "",
         email: "",
@@ -31,12 +54,12 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
+        setPasswordErrors([])
         
-
-        if (signupData.password !== signupData.confirmPassword)
-            {
-            toast.error("Passwords don't match!")
-            setLoading(false)
+        const numberOfErrors = validatePassword(signupData.password, signupData.confirmPassword)
+        
+        if (numberOfErrors.length > 0){
+            setPasswordErrors(numberOfErrors)
             setSignupData({
                 username: "",
                 email: "",
@@ -44,9 +67,15 @@ export default function SignUp() {
                 confirmPassword: "",
                 preferences: []
             })
+            numberOfErrors.map((item) => toast.error(item))
+            setLoading(false)
             return;
         }
-            
+
+
+        setPasswordErrors()
+         
+        
 
 
         const res = await fetch("https://anime-hub-backend-ik8o.onrender.com/api/signup",{
@@ -60,7 +89,8 @@ export default function SignUp() {
         });
 
         const data = await res.json()
-        
+
+
         if(!res.ok){
             toast.error(data.message ||"Something went wrong...")
             setSignupData({
@@ -82,7 +112,7 @@ export default function SignUp() {
             email: "",
             password: "",
             confirmPassword: "",
-            preferences: []
+            list: []
         })
         setLoading(false)
         if(res.ok){

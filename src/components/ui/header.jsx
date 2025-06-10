@@ -27,6 +27,10 @@ import { useAuth } from "@/Context/useAuth";
 export default function Header(){
     const [searchActive,setSearchActive] = useState(false)
     const { user, logOut } = useAuth()
+    
+
+
+
     return(
         <div className="flex justify-center items-center bg-grayish h-13 p-4 w-full">
 
@@ -77,7 +81,7 @@ export default function Header(){
                 <PopoverTrigger>
                     <CgProfile className="size-10 mr-1 ml-2 text-text-pri phone:hidden minitab:flex cursor-pointer" />
                 </PopoverTrigger>
-                <PopoverContent className={`bg-vibeBlack outline-none shadow-none`}>
+                <PopoverContent className={`bg-vibeBlack outline-none shadow-none rounded-lg`}>
                         <ul>
                             <li className="mb-5 cursor-pointer hover:text-crimAccent bg-vibeBlack text-text-pri font-playful">{user.username}</li>
                             <li className="mb-5 cursor-pointer hover:text-crimAccent bg-vibeBlack text-text-pri font-playful">Setting</li>
