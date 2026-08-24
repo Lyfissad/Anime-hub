@@ -115,6 +115,7 @@ const backupNewEpisodes = gql`
 
 function EpisodesTiles({ item }) {
 
+
   return (
     <div className="flex cursor-pointer mb-6 h-[8rem] w-[21rem] fade-in">
       <img
@@ -131,7 +132,7 @@ function EpisodesTiles({ item }) {
           <h4>
             Airing on:{" "}
             {item.nextAiringEpisode?.airingAt
-              ? new Date(item.nextAiringEpisode.airingAt * 1000).toLocaleString()
+              ? new Date(item.nextAiringEpisode.airingAt * 1000).toLocaleString("en-GB")
               : null}
           </h4>
           <h4 className="text-crimAccent mt-2">{item.duration} mins</h4>

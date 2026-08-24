@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa";
 
 export default function Footer(){
     return(
-    <div className="bg-gradient-to-b from-vibeBlack to-darkCrim w-full py-12">
+    <div className="bg-gradient-to-b from-vibeBlack to-darkCrim w-full py-12  ">
           <div className="phone:grid phone:grid-cols-1 minitab:grid minitab:grid-cols-3 gap-8 max-w-7xl mx-auto px-10">
             {/* Navigation Section */}
             <div className="phone:flex phone:space-x-20 phone:mx-auto minitab:block">
@@ -46,7 +46,7 @@ export default function Footer(){
                 <li>Press Inquiries</li>
                 <li>Get the App</li>
                 <li>Redeem Gift Cards</li>
-                <li>Index 2025: 72/100</li>
+                <li>Index 2026: 72/100</li>
               </ul>
             </div>
           </div>
